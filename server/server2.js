@@ -67,7 +67,9 @@ app.use('/downloads', express.static(downloadFolder));
 app.post('/process-merge2', upload.fields([
     { name: 'docx-files', maxCount: 10 },
 ]), (req, res) => {
-    
+
+    const destinationPath = path.join(__dirname, '../public/columnfiles', 'column.txt');
+
     const pythonProcess = spawn('python', [
         'merge2.py',
         '--directory', templatesFolder,
@@ -75,8 +77,7 @@ app.post('/process-merge2', upload.fields([
     ]);
 
     const sourcePath = path.join(__dirname, 'column.txt');
-    const destinationPath = path.join(__dirname, '../public/columnfiles', 'column.txt');
-
+    
     fs.copyFile(sourcePath, destinationPath, (err) => {
         if (err) {
             console.error('Error occurred while copying the file:', err);
