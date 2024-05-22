@@ -71,7 +71,7 @@ app.post('/process-merge2', upload.fields([
     const pythonProcess = spawn('python', [
         'merge2.py',
         '--directory', templatesFolder,
-        '--output', './column.txt'
+        '--output', destinationPath
     ]);
 
     const sourcePath = path.join(__dirname, 'column.txt');
