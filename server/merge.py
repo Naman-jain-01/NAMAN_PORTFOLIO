@@ -1,3 +1,6 @@
+import sys
+sys.path.append("/workspaces/NAMAN_PORTFOLIO/server/BKL/lib/python3.10/site-packages")
+
 import pandas as pd
 import re
 import io
@@ -5,8 +8,7 @@ import os
 from docx import Document
 import zipfile
 import argparse
-import sys
-sys.path.append("/workspaces/NAMAN_PORTFOLIO/server/BKL/lib/python3.10/site-packages")
+
 
 def replace_paragraph_text(paragraph, replacements):
     for key, value in replacements.items():

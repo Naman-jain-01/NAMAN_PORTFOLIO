@@ -1,3 +1,6 @@
+import sys
+sys.path.append("/workspaces/NAMAN_PORTFOLIO/server/BKL/lib/python3.10/site-packages")
+
 import os
 import re
 from docx import Document
@@ -5,8 +8,7 @@ import pandas as pd
 from tkinter import Tk, TclError
 from tkinter import ttk  # Themed tkinter
 import argparse
-import sys
-sys.path.append("/workspaces/NAMAN_PORTFOLIO/server/BKL/lib/python3.10/site-packages")
+
 
 def extract_placeholders_from_docx(filepath):
     placeholders = set()
