@@ -13,6 +13,49 @@ if (!fs.existsSync(downloadFolder)) {
     fs.mkdirSync(downloadFolder, { recursive: true });
 }
 
+
+const packages = ['pandas', 'python-docx', 'openpyxl', 'pypandoc', 'firebase-admin'];
+
+const installPackage = (pkg) => {
+    return new Promise((resolve, reject) => {
+        const process = spawn('pip', ['install', pkg]);
+
+        process.stdout.on('data', (data) => {
+            console.log(`stdout: ${data}`);
+        });
+
+        process.stderr.on('data', (data) => {
+            console.error(`stderr: ${data}`);
+        });
+
+        process.on('close', (code) => {
+            console.log(`pip install ${pkg} finished with code ${code}`);
+            if (code !== 0) {
+                reject(`Error installing ${pkg}`);
+            } else {
+                resolve();
+            }
+        });
+    });
+};
+
+const installPackages = async () => {
+    try {
+        for (const pkg of packages) {
+            await installPackage(pkg);
+        }
+        console.log("All packages installed successfully");
+        // Proceed with your next steps here, e.g., send a response
+        // res.send("All packages installed successfully");
+    } catch (error) {
+        console.error(error);
+        // Send an error response if needed
+        // res.status(500).send(error);
+    }
+};
+
+installPackages();
+
 const clearDownloadsFolder = () => {
     try {
         fs.readdirSync(downloadFolder).forEach((file) => {
