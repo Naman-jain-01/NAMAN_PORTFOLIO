@@ -5,8 +5,6 @@ import os
 import re
 from docx import Document
 import pandas as pd
-from tkinter import Tk, TclError
-from tkinter import ttk  # Themed tkinter
 import argparse
 
 
