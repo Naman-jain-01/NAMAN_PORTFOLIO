@@ -3,9 +3,14 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const nodemailer = require('nodemailer');
+const bodyParser = require('body-parser'); // Optional if using express built-in middleware
 
 const app = express();
 const port = 9000;
+
+app.use(bodyParser.urlencoded({ extended: true })); // For parsing application/x-www-form-urlencoded
+app.use(bodyParser.json()); // For parsing application/json
 
 const downloadPath = path.join(__dirname, '../public/downloads'); // It's a good practice to use `downloadPath` instead of `downloadFolder` in app.use('/downloads', express.static(downloadFolder));
 const downloadFolder = path.join(__dirname, '../public/downloads');
@@ -285,6 +290,37 @@ app.post('/cleanup_downloads1', (req, res) => {
     ]);
     res.status(200).send('Downloads folder has been cleared.');
 });
+
+app.post('/send', (req, res) => {
+    const { first_name, last_name, email, phone, subject } = req.body;
+
+    // Create a transporter object using SMTP transport
+    const transporter = nodemailer.createTransport({
+        service: 'Gmail', // You can use other services like 'Yahoo', 'Outlook', etc.
+        auth: {
+            user: 'namanjain2004.in@gmail.com', // Replace with your email
+            pass: 'crvv bmzs iqkw fphu', // Replace with your email password
+
+        },
+    });
+
+    // Setup email data
+    const mailOptions = {
+        from: email,
+        to: 'naman.jain22b@iiitg.ac.in', // Replace with your email
+        subject: 'New Contact Form Submission',
+        text: `First Name: ${first_name}\nLast Name: ${last_name}\nEmail: ${email}\nPhone: ${phone}\nSubject: ${subject}`,
+    };
+
+    // Send email
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return res.status(500).send('Error sending email: ' + error);
+        }
+        res.status(200).send('Message sent successfully!');
+    });
+});
+
 // Serve static files from the public directory
 app.use(express.static('../public'));
 

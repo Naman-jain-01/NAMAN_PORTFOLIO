@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="x-ua-compatible" content="ie=edge" />
-        <title>Home - Poco Template</title>
+        <title>Contact</title>
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -124,7 +124,11 @@
                                       <h1>Contact Us</h1>
                                   </div>
                                   <p>
-                                      Praesent non pharetra lorem. Quisque vitae eros ut dui egestas ultrices et quis odio. Praesent vitae tincidunt lacus.
+                                      For any query Conatact me via
+                                      <a href="mailto:namanjain2004.in@gmail.com" style="color: aliceblue;">Email</a>
+                                      and
+                                      <a href="tel:+9435107262" style="color: aliceblue;">Mobile Number</a>
+                                    
                                   </p>
                               </div>
                           </div>
@@ -143,7 +147,7 @@
                                               <a href="index.html">Home</a>
                                           </li>
                                           <li class="breadcrumb-item active" aria-current="page">
-                                              Blogs
+                                              Contact Me
                                           </li>
                                       </ol>
                                   </nav>
@@ -160,11 +164,12 @@
             <div class="map-area">
                 <div class="container">
                     <div class="map">
-                        <div id="map" data-aos="fade-up"></div>
+                        <iframe data-aos="fade-up" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3583.5414847605402!2d91.55941587531134!3d26.08123727715258!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x375a5987e09da847%3A0xfc90e6da1b4547c1!2sIndian%20Institute%20of%20Information%20Technology%20Guwahati%20(IIITG)!5e0!3m2!1sen!2sin!4v1716743353005!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        
                     </div>
                 </div>
             </div>
-
+            
             <!--  CONTACT FORM AREA-->
             <section class="conatact-area">
                 <div class="container conatact-area__container">
@@ -174,29 +179,29 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="contact-form">
-                                <form>
+                                <form action="/send" method="post">
                                     <div class="form-row conatact-area__formRow">
                                         <div class="col-12 col-md-6 col-lg-6">
-                                            <input type="text" class="form-control" style="width: 100%" placeholder="First name" />
+                                            <input type="text" name="first_name" class="form-control" placeholder="First name" required />
                                             <i class="icon fas fa-user"></i>
                                         </div>
                                         <div class="col-12 col-md-6 col-lg-6">
-                                            <input type="text" class="form-control" style="width: 100%" placeholder="Last name" />
+                                            <input type="text" name="last_name" class="form-control" placeholder="Last name" required />
                                             <i class="icon fas fa-user"></i>
                                         </div>
                                     </div>
                                     <div class="form-row conatact-area__formRow">
                                         <div class="col-12 col-md-6 col-lg-6">
-                                            <input type="email" class="form-control" style="width: 100%" placeholder="Enter Email" />
+                                            <input type="email" name="email" class="form-control" placeholder="Enter Email" required />
                                             <i class="icon fas fa-envelope"></i>
                                         </div>
                                         <div class="col-12 col-md-6 col-lg-6">
-                                            <input type="number" class="form-control" style="width: 100%" placeholder="Phone Number" />
+                                            <input type="tel" name="phone" class="form-control" placeholder="Phone Number" required />
                                             <i class="icon fas fa-phone-alt"></i>
                                         </div>
                                     </div>
                                     <div class="form-message conatact-area__formRow">
-                                        <textarea cols="30" rows="10" placeholder="Subject"></textarea>
+                                        <textarea name="subject" cols="30" rows="10" placeholder="Subject" required></textarea>
                                         <div class="icon">
                                             <i class="fas fa-pen"></i>
                                         </div>
