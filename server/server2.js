@@ -321,6 +321,37 @@ app.post('/send', (req, res) => {
     });
 });
 
+app.post('/sendNEW', (req, res) => {
+    const { your_name, email , subject } = req.body;
+
+    // Create a transporter object using SMTP transport
+    const transporter = nodemailer.createTransport({
+        service: 'Gmail', // You can use other services like 'Yahoo', 'Outlook', etc.
+        auth: {
+            user: 'namanjain2004.in@gmail.com', // Replace with your email
+            pass: 'crvv bmzs iqkw fphu', // Replace with your email password
+
+        },
+    });
+
+    // Setup email data
+    const mailOptions = {
+        from: email,
+        to: 'naman.jain22b@iiitg.ac.in', // Replace with your email
+        subject: 'New Contact Form Submission',
+        text: `Name: ${your_name}\nEmail: ${email}\nText ${subject}`,
+    };
+
+    // Send email
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return res.status(500).send('Error sending email: ' + error);
+        }
+        res.status(200).send('Message sent successfully!');
+    });
+});
+
+
 // Serve static files from the public directory
 app.use(express.static('../public'));
 
