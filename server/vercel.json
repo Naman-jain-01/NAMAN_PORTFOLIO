@@ -1,0 +1,7 @@
+{
+    "scripts": {
+      "dev": "next dev",
+      "build": "next build",
+      "start": "node server/server2.js"
+    }
+  }
