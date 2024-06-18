@@ -119,7 +119,7 @@ app.post('/process-merge2', upload.fields([
     const destinationPath = path.join(__dirname, '../public/columnfiles', 'column.txt');
 
     const pythonProcess = spawn('python', [
-        'merge2.py',
+        './api/merge2.py',
         '--directory', templatesFolder,
         '--output', destinationPath
     ]);
@@ -152,7 +152,7 @@ app.post('/process-merge', upload.fields([
 
     
     const pythonProcess = spawn('python', [
-        'merge.py',
+        './api/merge.py',
         '--template_folder', templatesFolder,
         '--excel_folder', excelFolder,
         '--output_format', req.body['output-format'], // Ensure 'output-format' is being sent in the form data
@@ -183,7 +183,7 @@ app.post('/process-merge', upload.fields([
         
         
         const pythonUpload = spawn('node', [
-            './upload.js', 
+            'upload.js', 
             '--action', 'write',
             '--folder', downloadFolder
         ]);
@@ -356,31 +356,31 @@ app.post('/sendNEW', (req, res) => {
 app.use(express.static('../public'));
 
 
-const axios = require('axios');
+// const axios = require('axios');
 
-const urlToAccess = 'https://naman-portfolio-3.onrender.com/index.html'; // Replace with the URL you want to access
-const retryInterval = 300000; // Retry interval in milliseconds (5 seconds in this case)
-async function accessWebsite(url) {
-    try {
-        const response = await axios.get(url);
-        console.log(`Successfully accessed ${url}. Status: ${response.status}`);
-        return true; // Return true if successfully accessed
-    } catch (error) {
-        console.error(`Error accessing ${url}:`, error.message);
-        return false; // Return false if error occurred
-    }
-}
-async function continuouslyAccessWebsite(url, interval) {
-    setInterval(async () => {
-        console.log(`Attempting to access ${url}...`);
-        const success = await accessWebsite(url);
-        if (success) {
-            console.log(`Successfully accessed ${url}. Stopping retries.`);
-            clearInterval(this); // Stop further retries if successful
-        }
-    }, interval);
-}
-continuouslyAccessWebsite(urlToAccess, retryInterval);
+// const urlToAccess = 'https://naman-portfolio-3.onrender.com/index.html'; // Replace with the URL you want to access
+// const retryInterval = 300000; // Retry interval in milliseconds (5 seconds in this case)
+// async function accessWebsite(url) {
+//     try {
+//         const response = await axios.get(url);
+//         console.log(`Successfully accessed ${url}. Status: ${response.status}`);
+//         return true; // Return true if successfully accessed
+//     } catch (error) {
+//         console.error(`Error accessing ${url}:`, error.message);
+//         return false; // Return false if error occurred
+//     }
+// }
+// async function continuouslyAccessWebsite(url, interval) {
+//     setInterval(async () => {
+//         console.log(`Attempting to access ${url}...`);
+//         const success = await accessWebsite(url);
+//         if (success) {
+//             console.log(`Successfully accessed ${url}. Stopping retries.`);
+//             clearInterval(this); // Stop further retries if successful
+//         }
+//     }, interval);
+// }
+// continuouslyAccessWebsite(urlToAccess, retryInterval);
 // Start the server
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
