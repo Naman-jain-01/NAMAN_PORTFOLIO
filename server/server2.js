@@ -359,7 +359,7 @@ app.use(express.static('../public'));
 const axios = require('axios');
 
 const urlToAccess = 'https://naman-portfolio-3.onrender.com/index.html'; // Replace with the URL you want to access
-const retryInterval = 40000; // Retry interval in milliseconds (5 seconds in this case)
+const retryInterval = 300000; // Retry interval in milliseconds (5 seconds in this case)
 async function accessWebsite(url) {
     try {
         const response = await axios.get(url);
