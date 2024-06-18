@@ -7,7 +7,7 @@ const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser'); // Optional if using express built-in middleware
 
 const app = express();
-const port =4000;
+const port =4004;
 
 app.use(bodyParser.urlencoded({ extended: true })); // For parsing application/x-www-form-urlencoded
 app.use(bodyParser.json()); // For parsing application/json
@@ -19,7 +19,7 @@ if (!fs.existsSync(downloadFolder)) {
 }
 
 
-const packages = ['pandas', 'python-docx', 'openpyxl', 'pypandoc', 'firebase-admin'];
+const packages = ['pandas', 'python-docx', 'openpyxl'];
 
 const installPackage = (pkg) => {
     return new Promise((resolve, reject) => {
@@ -182,10 +182,10 @@ app.post('/process-merge', upload.fields([
         });
         
         
-        const pythonUpload = spawn('python', [
-            './upload.py', 
-            '--folder', downloadFolder, // This should be downloadFolder, not outputFolder if you're uploading the generated files
-            '--action', 'write'
+        const pythonUpload = spawn('node', [
+            './upload.js', 
+            '--action', 'write',
+            '--folder', downloadFolder
         ]);
 
         pythonUpload.stdout.on('data', (data) => {
@@ -258,8 +258,8 @@ function ensureFolderExists(folder) {
 
 app.post('/cleanup_downloads3', (req, res) => {
     clearDownloadsFolder(); // Clear the downloads folder on request
-    spawn('python', [
-        './upload.py', 
+    spawn('node', [
+        './upload.js', 
         '--action', 'delete'
     ]);
     res.status(200).send('Downloads folder has been cleared.');
@@ -284,8 +284,8 @@ ensureFolderExists(destinationPath);
 
 app.post('/cleanup_downloads1', (req, res) => {
     clearDownloadsFolder(); // Clear the downloads folder on request
-    spawn('python', [
-        './upload.py', 
+    spawn('node', [
+        './upload.js', 
         '--action', 'delete'
     ]);
     res.status(200).send('Downloads folder has been cleared.');
